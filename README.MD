@@ -1,4 +1,4 @@
-# Project Title
+# Garage Mobility Blog
 
 Node.js(Express) server for Garage Mobility Blog
 
