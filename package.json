@@ -3,7 +3,31 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "build": "npx tsc",
+    "start": "node dist/index.js"
+  },
   "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.19.2",
+    "tsx": "^4.13.0",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.24.7",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.21",
+    "@types/helmet": "^4.0.0",
+    "@types/node": "^20.14.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "helmet": "^4.1.0",
+    "mongoose": "^8.4.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1"
   }
 }
