@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
 import app from "./app/index";
+import { connectToMongo } from "./config/db.config";
 
 // Define a route for the root path ('/')
 app.get("/", (req: Request, res: Response) => {
   // Send a response to the client
   res.send("Hello, TypeScript + Node.js + Express!");
 });
+
+connectToMongo();
 
 const port = process.env.PORT || 8080;
 

@@ -4,7 +4,7 @@ import cors from "cors";
 import logger from "morgan";
 import helmet from "helmet";
 import compression from "compression";
-// import routes from "../routes";
+import routes from "../routes/index";
 
 const app: Express = express();
 
@@ -15,6 +15,6 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use("/", routes);
+app.use("/", routes);
 
 export default app;

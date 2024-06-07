@@ -4,10 +4,6 @@ const { Schema } = mongoose;
 
 const blogSchema = new Schema(
   {
-    _id: {
-      type: Schema.Types.ObjectId,
-      required: true,
-    },
     title: {
       type: String,
       required: true,
@@ -31,3 +27,4 @@ const blogSchema = new Schema(
 );
 
 const Blog = mongoose.model("Blog", blogSchema);
+export default Blog;
