@@ -2,9 +2,7 @@ import mongoose from "mongoose";
 
 export const connectToMongo = () => {
   try {
-    mongoose.connect(
-      "mongodb+srv://odianoseairehrour:QjJHnKuzm011ldTZ@cluster0.gwz0cz9.mongodb.net/blog"
-    );
+    mongoose.connect(process.env.mongo_db);
     console.info("Connected the the database 🔥");
   } catch (error) {
     console.error(error);

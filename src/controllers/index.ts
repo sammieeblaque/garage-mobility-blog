@@ -16,7 +16,7 @@ export const createBlogPost = async (
       author,
     });
     if (error) {
-      next(error);
+      res.status(400).json({ error: error.details[0].message });
     }
     const blog = await Blog.create({
       title: title,
