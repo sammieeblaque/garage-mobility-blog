@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import Blog from "../models/index";
 import { deleteOne, find, findById, updateBlog } from "../utils/db.utils";
+import { createblogSchema, updateBlogSchema } from "../validations/index";
 
 export const createBlogPost = async (
   req: Request,
@@ -9,6 +10,14 @@ export const createBlogPost = async (
 ) => {
   try {
     const { title, author, content } = req.body;
+    const { error } = createblogSchema.validate({
+      title,
+      content,
+      author,
+    });
+    if (error) {
+      next(error);
+    }
     const blog = await Blog.create({
       title: title,
       author: author,
@@ -55,9 +64,21 @@ export const removeBlogPostById = async (req: Request, res: Response) => {
   }
 };
 
-export const updateBlogPost = async (req: Request, res: Response) => {
+export const updateBlogPost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const id = req.params.postId;
   const { title, content } = req.body;
+
+  const { error } = updateBlogSchema.validate({
+    title,
+    content,
+  });
+  if (error) {
+    res.status(400).json({ error: error.details[0].message });
+  }
 
   try {
     const blog = await updateBlog(Blog, id, req);
