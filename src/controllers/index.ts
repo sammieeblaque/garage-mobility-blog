@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import Blog from "../models/index";
-import { find, findById } from "../utils/db.utils";
+import { deleteOne, find, findById, updateBlog } from "../utils/db.utils";
 
 export const createBlogPost = async (
   req: Request,
@@ -28,7 +28,7 @@ export const getBlogPosts = async (
   next: NextFunction
 ) => {
   try {
-    const blogs = find(Blog);
+    const blogs = await find(Blog);
     res.status(200).json(blogs);
   } catch (error) {
     next(error);
@@ -42,5 +42,27 @@ export const getBlogPostsById = async (req: Request, res: Response) => {
     res.status(200).json(blog);
   } catch (error) {
     res.status(404).send("Blog not found");
+  }
+};
+
+export const removeBlogPostById = async (req: Request, res: Response) => {
+  const id = req.params.postId;
+  try {
+    const data = await deleteOne(Blog, id);
+    if (data) res.status(204).json(data);
+  } catch (error) {
+    res.status(404).send("Not found");
+  }
+};
+
+export const updateBlogPost = async (req: Request, res: Response) => {
+  const id = req.params.postId;
+  const { title, content } = req.body;
+
+  try {
+    const blog = await updateBlog(Blog, id, req);
+    if (blog) res.status(200).json(blog);
+  } catch (error) {
+    res.status(404).send("Not found");
   }
 };
